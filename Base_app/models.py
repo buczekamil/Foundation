@@ -32,7 +32,8 @@ class Donation(models.Model):
     category = models.ManyToManyField(Category)
     institution = models.ForeignKey(Institution, on_delete=models.CASCADE)
     address = models.CharField(max_length=250)
-    phone = PhoneField()
+    # phone = PhoneField()
+    phone = models.IntegerField()
     city = models.CharField(max_length=250)
     zip_code = models.CharField(max_length=6)
     pick_up_date = models.DateField()
@@ -40,7 +41,8 @@ class Donation(models.Model):
     pick_up_comment = models.CharField(max_length=250)
     user = models.ForeignKey(User, default='Null', on_delete=models.CASCADE)
 
-
+    def __str__(self):
+        return self.institution
 
 
 # Create your models here.
