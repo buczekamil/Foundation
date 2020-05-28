@@ -24,6 +24,8 @@ urlpatterns = [
     path('', views.LandingPage.as_view(), name='landing'),
     path('adddonation/', views.add_donation, name='donation'),
     path('accounts/', include('Accounts.urls')),
+
+
     path('accounts/', include('django.contrib.auth.urls')),
 
 ]
