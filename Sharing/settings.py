@@ -38,8 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Base_app',
-    'Accounts',
+    'Accounts.apps.AccountsConfig',
+
 ]
+
+AUTHENTICATION_BACKENDS = ('Accounts.authbackend.EmailBackend',)
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -50,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+AUTH_USER_MODEL = 'Accounts.MyUser'
 
 ROOT_URLCONF = 'Sharing.urls'
 
@@ -79,7 +85,7 @@ WSGI_APPLICATION = 'Sharing.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'charity-donation',
+        'NAME': 'Charity',
         'HOST': 'localhost',
         'USER': 'postgres',
         'PASSWORD': 'yuliop'
@@ -129,6 +135,6 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
-LOGIN_REDIRECT_URL = '/scas'
+LOGIN_REDIRECT_URL = ''
 LOGOUT_REDIRECT_URL = '/accounts/login/'
 

@@ -9,12 +9,22 @@
     <link rel="stylesheet" href="{% static '/css/style.css' %}">
   </head>
   <body>
-       <header>
+     {% if user.is_authenticated %}
+    <div class="col-lg-12">Hi {{ user.first_name }}!
+    <header class="header--main-page">
+      <nav class="container container--70">
+        <ul class="nav--actions">
+          <li><a href="/accounts/logout/" class="btn btn--small btn--without-border">Wyloguj się</a></li>
+        </ul>
+
+{% else %}
+<header class="header--main-page">
       <nav class="container container--70">
         <ul class="nav--actions">
           <li><a href="/accounts/login/" class="btn btn--small btn--without-border">Zaloguj</a></li>
           <li><a href="/accounts/signup/" class="btn btn--small btn--highlighted">Załóż konto</a></li>
         </ul>
+{% endif %}
 
         <ul>
           <li><a href="{% url 'landing' %}" class="btn btn--without-border active">Start</a></li>
