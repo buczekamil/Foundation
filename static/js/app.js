@@ -240,7 +240,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     let category = document.getElementById("category");
                     let bags = document.getElementById("id_quantity");
                     let institution = document.getElementById("id_institution");
-                    institution.setAttribute("value", institution.className);
+                    // institution.setAttribute("value", institution.value);
                     bags.setAttribute("value", bags.value);
                     let address = document.getElementById("id_address");
                     address.setAttribute("value", address.value);
@@ -299,8 +299,8 @@ document.addEventListener("DOMContentLoaded", function () {
                         // }
                     }
                 )
-                // this.currentStep++;
-                // this.updateForm();
+                this.currentStep++;
+                this.updateForm();
             }
         }
 

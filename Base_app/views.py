@@ -1,7 +1,8 @@
 from profile import Profile
-from django.shortcuts import render
-from django.http import JsonResponse
 
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
+from django.http import JsonResponse, HttpResponseRedirect
 from django.contrib.auth import login
 from django.contrib.auth.models import User
 from django.db.models import Sum, Count
@@ -22,9 +23,14 @@ class LandingPage(View):
         except KeyError:
             bags = 0
             institutions = 0
-        return render(request, 'base.html', {'bags': bags, 'institutions': institutions})
+        return render(request, 'index.html', {'bags': bags, 'institutions': institutions})
 
 
+def form_confirmation(request):
+    return render(request, 'form-confirmation.html')
+
+
+@login_required
 def add_donation(request):
     if request.method == "GET":
         form = DonationForm()
@@ -35,7 +41,7 @@ def add_donation(request):
     elif request.method == "POST" and request.is_ajax():
         form = DonationForm(request.POST)
         if form.is_valid():
-            category = form.cleaned_data['category']
+            categories = form.cleaned_data.get('category')
             quantity = form.cleaned_data['quantity']
             institution = form.cleaned_data['institution']
             address = form.cleaned_data['address']
@@ -46,8 +52,18 @@ def add_donation(request):
             pick_up_time = form.cleaned_data['pick_up_time']
             pick_up_comment = form.cleaned_data['pick_up_comment']
             user = request.user
-            Donation.objects.create(**form.cleaned_data, user=user)
-            return redirect('form-confirmation.html')
+            donation = Donation.objects.create(quantity=quantity,
+                                               institution=institution,
+                                               address=address,
+                                               city=city,
+                                               zip_code=zip_code,
+                                               phone=phone,
+                                               pick_up_date=pick_up_date,
+                                               pick_up_time=pick_up_time,
+                                               pick_up_comment=pick_up_comment,
+                                               user=user)
+            donation.category.set(categories)
+            return HttpResponseRedirect('conf')
         else:
             pass
         return render(request, 'form.html', {"form": form})
