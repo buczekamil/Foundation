@@ -55,199 +55,206 @@
         <div class="form--steps-container">
             <div class="form--steps-counter">Krok <span>1</span>/5</div>
 
-            <form method="post" id="don-form" action="form-confirmation.html">
-                {% csrf_token %}
-                <!-- STEP 1: class .active is switching steps -->
-                <div data-step="1" class="active">
-                    <h3>Zaznacz co chcesz oddać:</h3>
-                    {% for value, text in form.category.field.choices %}
-                        <div class="form-group form-group--checkbox">
-                            <label>
-                                <input
-                                        type="checkbox"
-                                        name="{{ form.category.html_name }}"
-                                        value="{{ value }}"
-                                        id="category"
-                                        data-gift="{{ text }}"
-                                />
-                                <span class="checkbox"></span>
-                                <span class="description">
+            <form method="post" id="don-form" action="form-confirmation.html" name="Form"
+            ">
+            {% csrf_token %}
+            <!-- STEP 1: class .active is switching steps -->
+            <div data-step="1" class="active">
+                <h3>Zaznacz co chcesz oddać:</h3>
+                {% for value, text in form.category.field.choices %}
+                    <div class="form-group form-group--checkbox">
+                        <label>
+                            <input
+                                    type="checkbox"
+                                    name="{{ form.category.html_name }}"
+                                    value="{{ value }}"
+                                    id="category"
+                                    data-gift="{{ text }}"
+                            />
+                            <span class="checkbox"></span>
+                            <span class="description">
                    {{ text }}
                   </span>
-                            </label>
-                        </div>
-                    {% endfor %}
-                    <div class="form-group form-group--buttons">
-                        <button type="button" class="btn next-step">Dalej</button>
-                    </div>
-                </div>
-
-                <!-- STEP 2 -->
-                <div data-step="2">
-                    <h3>Podaj liczbę 60l worków, w które spakowałeś/aś rzeczy:</h3>
-                    <div class="form-group form-group--inline">
-                        <label>
-
-                            Liczba 60l worków:
-                            <input type="number" name="{{ form.quantity.html_name }}" step="1" min="1"
-                                   id="{{ form.quantity.id_for_label }}"/>
-
                         </label>
                     </div>
-                    <div class="form-group form-group--buttons">
-                        <button type="button" class="btn prev-step">Wstecz</button>
-                        <button type="button" class="btn next-step">Dalej</button>
-                    </div>
+                {% endfor %}
+                <div class="form-group form-group--buttons">
+                    <button type="button" class="btn next-step">Dalej</button>
                 </div>
+            </div>
+
+            <!-- STEP 2 -->
+            <div data-step="2">
+                <h3>Podaj liczbę 60l worków, w które spakowałeś/aś rzeczy:</h3>
+                <div class="form-group form-group--inline">
+                    <label>
+
+                        Liczba 60l worków:
+                        <input type="number" name="{{ form.quantity.html_name }}" step="1" min="1"
+                               id="{{ form.quantity.id_for_label }}" required/>
+
+                    </label>
+                </div>
+                <div class="form-group form-group--buttons">
+                    <button type="button" class="btn prev-step">Wstecz</button>
+                    <button type="button" class="btn next-step">Dalej</button>
+                </div>
+            </div>
 
 
-                <!-- STEP 4 -->
-                <div data-step="3">
-                    <h3>Wybierz organizacje, której chcesz pomóc:</h3>
+            <!-- STEP 4 -->
+            <div data-step="3">
+                <h3>Wybierz organizacje, której chcesz pomóc:</h3>
 
-                    {% for inst in institutions %}
-                        <div class="form-group form-group--checkbox">
-                            <label>
-                                <input type="radio" name="{{ form.institution.html_name }}" value="{{ inst.id }}" data-foo="{{ inst.name }}"
-                                       id="{{ form.in.id_for_label }}"/>
-                                <span class="checkbox radio"></span>
-                                <span class="description">
+                {% for inst in institutions %}
+                    <div class="form-group form-group--checkbox">
+                        <label>
+                            <input type="radio" name="{{ form.institution.html_name }}" value="{{ inst.id }}"
+                                   data-foo="{{ inst.name }}"
+                                   id="{{ form.in.id_for_label }}"/>
+                            <span class="checkbox radio"></span>
+                            <span class="description">
                   <div class="title">{{ inst.name }}</div>
                   <div class="subtitle">
                     {{ inst.description }}
                   </div>
                 </span>
+                        </label>
+                    </div>
+                {% endfor %}
+
+                <div class="form-group form-group--buttons">
+                    <button type="button" class="btn prev-step">Wstecz</button>
+                    <button type="button" class="btn next-step">Dalej</button>
+                </div>
+            </div>
+
+            <!-- STEP 5 -->
+            <div data-step="4">
+                <h3>Podaj adres oraz termin odbioru rzecz przez kuriera:</h3>
+
+                <div class="form-section form-section--columns">
+                    <div class="form-section--column">
+                        <h4>Adres odbioru</h4>
+                        <div class="form-group form-group--inline">
+                            <label> Ulica <input type="text"
+                                                 name="{{ form.address.html_name }}"
+                                                 id="{{ form.address.id_for_label }}"/> </label>
+                        </div>
+
+                        <div class="form-group form-group--inline">
+                            <label> Miasto <input type="text" name="{{ form.city.html_name }}"
+                                                  id="{{ form.city.id_for_label }}"/> </label>
+                        </div>
+
+                        <div class="form-group form-group--inline">
+                            <label>
+                                Kod pocztowy <input type="text" name="{{ form.zip_code.html_name }}"
+                                                    id="{{ form.zip_code.id_for_label }}"/>
                             </label>
                         </div>
-                    {% endfor %}
 
-                    <div class="form-group form-group--buttons">
-                        <button type="button" class="btn prev-step">Wstecz</button>
-                        <button type="button" class="btn next-step">Dalej</button>
+                        <div class="form-group form-group--inline">
+                            <label>
+                                Numer telefonu <input type="number" name="{{ form.phone.html_name }}"
+                                                      id="{{ form.phone.id_for_label }}"/>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-section--column">
+                        <h4>Termin odbioru</h4>
+                        <div class="form-group form-group--inline">
+                            <label> Data <input type="date" name="{{ form.pick_up_date.html_name }}"
+                                                id="{{ form.pick_up_date.id_for_label }}"/> </label>
+                        </div>
+
+                        <div class="form-group form-group--inline">
+                            <label> Godzina <input type="time" name="{{ form.pick_up_time.html_name }}"
+                                                   id="{{ form.pick_up_time.id_for_label }}"/> </label>
+                        </div>
+
+                        <div class="form-group form-group--inline">
+                            <label>
+                                Uwagi dla kuriera
+                                <textarea name="{{ form.pick_up_comment.html_name }}" rows="5"
+                                          id="{{ form.pick_up_comment.id_for_label }}"></textarea>
+                            </label>
+                        </div>
                     </div>
                 </div>
+                <div class="form-group form-group--buttons">
+                    <button type="button" class="btn prev-step">Wstecz</button>
+                    <button type="submit" class="btn next-step" id="btn-sum">Dalej</button>
+                </div>
+            </div>
 
-                <!-- STEP 5 -->
-                <div data-step="4">
-                    <h3>Podaj adres oraz termin odbioru rzecz przez kuriera:</h3>
+            <!-- STEP 6 -->
+            <div data-step="5">
+                <h3>Podsumowanie Twojej darowizny</h3>
+
+                <div class="summary">
+                    <div class="form-section">
+                        <h4>Oddajesz:</h4>
+                        <ul>
+                            <li>
+                                <span class="icon icon-bag"></span>
+                                <span class="summary--text"
+                                ></span>
+                                <label for="quantity">Liczba worków:
+                                    <text id="quantity"></text>
+                                    <p>Oddajesz: </p>
+                                    <p>
+                                        <text id="gifts"></text>
+                                    </p>
+                            </li>
+
+                            <li>
+                                <span class="icon icon-hand"></span>
+                                <span class="summary--text"
+                                ></span
+                                >
+                                <p>
+                                    <text id="institution"></text>
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
 
                     <div class="form-section form-section--columns">
                         <div class="form-section--column">
-                            <h4>Adres odbioru</h4>
-                            <div class="form-group form-group--inline">
-                                <label> Ulica <input type="text"
-                                                     name="{{ form.address.html_name }}"
-                                                     id="{{ form.address.id_for_label }}"/> </label>
-                            </div>
-
-                            <div class="form-group form-group--inline">
-                                <label> Miasto <input type="text" name="{{ form.city.html_name }}"
-                                                      id="{{ form.city.id_for_label }}"/> </label>
-                            </div>
-
-                            <div class="form-group form-group--inline">
-                                <label>
-                                    Kod pocztowy <input type="text" name="{{ form.zip_code.html_name }}"
-                                                        id="{{ form.zip_code.id_for_label }}"/>
-                                </label>
-                            </div>
-
-                            <div class="form-group form-group--inline">
-                                <label>
-                                    Numer telefonu <input type="number" name="{{ form.phone.html_name }}"
-                                                          id="{{ form.phone.id_for_label }}"/>
-                                </label>
-                            </div>
+                            <h4>Adres odbioru:</h4>
+                            <ul>
+                                <li></li>
+                                <li id="summary-address"></li>
+                                <li id="summary-city"></li>
+                                <li id="summary-postcode"></li>
+                                <li id="summary-phone"></li>
+                            </ul>
                         </div>
-
                         <div class="form-section--column">
-                            <h4>Termin odbioru</h4>
-                            <div class="form-group form-group--inline">
-                                <label> Data <input type="date" name="{{ form.pick_up_date.html_name }}"
-                                                    id="{{ form.pick_up_date.id_for_label }}"/> </label>
-                            </div>
+                            <h4>Termin odbioru:</h4>
+                            <ul>
+                                <li id="summary-data"></li>
+                                <li id="summary-time"></li>
+                                <li id="summary-more_info"></li>
 
-                            <div class="form-group form-group--inline">
-                                <label> Godzina <input type="time" name="{{ form.pick_up_time.html_name }}"
-                                                       id="{{ form.pick_up_time.id_for_label }}"/> </label>
-                            </div>
-
-                            <div class="form-group form-group--inline">
-                                <label>
-                                    Uwagi dla kuriera
-                                    <textarea name="{{ form.pick_up_comment.html_name }}" rows="5"
-                                              id="{{ form.pick_up_comment.id_for_label }}"></textarea>
-                                </label>
-                            </div>
+                            </ul>
                         </div>
-                    </div>
-                    <div class="form-group form-group--buttons">
-                        <button type="button" class="btn prev-step">Wstecz</button>
-                        <button type="submit" class="btn next-step" id="btn-sum">Dalej</button>
                     </div>
                 </div>
 
-                <!-- STEP 6 -->
-                <div data-step="5">
-                    <h3>Podsumowanie Twojej darowizny</h3>
+                <div class="form-group form-group--buttons">
+                    <button type="button" class="btn prev-step">Wstecz</button>
+                    <button type="submit"
+                            class="btn"
+                            id="save"
+                    >
+                        Potwierdzam
+                    </button>
 
-                    <div class="summary">
-                        <div class="form-section">
-                            <h4>Oddajesz:</h4>
-                            <ul>
-                                <li>
-                                    <span class="icon icon-bag"></span>
-                                    <span class="summary--text"
-                                    ></span>
-                                    <label for="quantity">Liczba worków: <text id="quantity"> </text>
-                                        <p>Oddajesz: </p>
-                                       <p> <text id="gifts"></text></p>
-                                </li>
-
-                                <li>
-                                    <span class="icon icon-hand"></span>
-                                    <span class="summary--text"
-                                    ></span
-                                    >
-                                    <p><text id="institution"></text></p>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="form-section form-section--columns">
-                            <div class="form-section--column">
-                                <h4>Adres odbioru:</h4>
-                                <ul>
-                                    <li></li>
-                                    <li id="summary-address"></li>
-                                    <li id="summary-city"></li>
-                                    <li id="summary-postcode"></li>
-                                    <li id="summary-phone"></li>
-                                </ul>
-                            </div>
-                            <div class="form-section--column">
-                                <h4>Termin odbioru:</h4>
-                                <ul>
-                                    <li id="summary-data"></li>
-                                    <li id="summary-time"></li>
-                                    <li id="summary-more_info"></li>
-
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group form-group--buttons">
-                        <button type="button" class="btn prev-step">Wstecz</button>
-                        <button type="submit"
-                                class="btn"
-
-                        >
-                            Potwierdzam
-                        </button>
-
-            </form>
-        </div>
+                    </form>
+                </div>
     </section>
 
 {% endblock %}

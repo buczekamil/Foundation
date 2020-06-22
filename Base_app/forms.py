@@ -1,11 +1,11 @@
 from django.forms import ModelForm, ModelMultipleChoiceField, ModelChoiceField
 from django.template.defaultfilters import register
-
 from Base_app.models import Donation
 
 
 class DonationForm(ModelForm):
     # category = ModelMultipleChoiceField(queryset=Category.objects.all())
+
 
     class Meta:
         model = Donation

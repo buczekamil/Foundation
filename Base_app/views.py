@@ -1,5 +1,4 @@
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse, HttpResponseRedirect
 from django.db.models import Sum, Count
 from django.shortcuts import render, redirect
 from django.views import View
@@ -57,8 +56,8 @@ def add_donation(request):
                                                pick_up_time=pick_up_time,
                                                pick_up_comment=pick_up_comment,
                                                user=user)
-            donation.category.set(categories) ### << --- MultipleChoiceField
-            return redirect('form-confirmation.html')
+            donation.category.set(categories)  ### << --- MultipleChoiceField
+            return redirect('/adddonation/conf/')
         else:
             pass
         return render(request, 'form.html', {"form": form})

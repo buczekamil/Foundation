@@ -254,7 +254,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     let time = document.getElementById("id_pick_up_time");
                     time.setAttribute("value", time.value);
                     let more_info = document.getElementById("id_pick_up_comment");
-                    document.getElementById("institution").innerText = "Nazwa organizacji, której przekazujesz dary: "+ document.querySelector('input[name="institution"]:checked').dataset.foo;
+                    document.getElementById("institution").innerText = document.querySelector('input[name="institution"]:checked').dataset.foo;
                     more_info.setAttribute("value", more_info.value);
                     document.getElementById("quantity").innerText = bags.value;
                     document.getElementById("summary-address").innerText = address.value;
@@ -269,13 +269,12 @@ document.addEventListener("DOMContentLoaded", function () {
 				let selectedItems="";
 				for(let i=0; i<items.length; i++){
 					if(items[i].type=='checkbox' && items[i].checked==true)
-						selectedItems+="•"+items[i].dataset.gift +"\n";
+						selectedItems+="• "+items[i].dataset.gift +"\n";
 				}
 				document.getElementById("gifts").innerText = selectedItems
 
                 })
             }
-
             /**
              * Submit form
              *
@@ -312,5 +311,31 @@ document.addEventListener("DOMContentLoaded", function () {
         if (form !== null) {
             new FormSteps(form);
         }
+        // function FormValidation()
+     document.querySelector("#btn-sum").addEventListener('click', function () {
+    let address = document.forms["Form"]["address"];
+    let city = document.forms["Form"]["city"];
+    let phone = document.forms["Form"]["phone"];
+    let zip =  document.forms["Form"]["zip_code"];
+    let date =  document.forms["Form"]["pick_up_date"];
+    let time =  document.forms["Form"]["pick_up_time"];
+
+
+
+    if (address.value == "" ||city.value == "" || zip.value == "" || phone.value == "" || date.value == "" || time.value=="")
+    {
+        window.alert("Wprowadź niezbędne dane");
+        $("#save").prop("disabled", true)
+        return false
     }
-);
+
+    else {
+        $("#save").prop("disabled", false)
+    }
+    return true;
+})
+    })
+
+
+
+

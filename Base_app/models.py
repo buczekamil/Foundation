@@ -31,14 +31,14 @@ class Institution(models.Model):
 
 
 class Donation(models.Model):
-    quantity = models.IntegerField(validators=[MinValueValidator(0, message='Minimum value = 0')])
+    quantity = models.IntegerField(validators=[MinValueValidator(1, message='Minimum value = 0')])
     category = models.ManyToManyField(Category)
     institution = models.ForeignKey(Institution, on_delete=models.CASCADE)
     address = models.CharField(max_length=250)
     phone = models.IntegerField()
     city = models.CharField(max_length=250)
     zip_code = models.CharField(max_length=6)
-    pick_up_date = models.DateField()
+    pick_up_date = models.DateField( )
     pick_up_time = models.TimeField()
     pick_up_comment = models.CharField(max_length=250)
     user = models.ForeignKey(MyUser, default='Null', on_delete=models.CASCADE)
