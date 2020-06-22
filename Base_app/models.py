@@ -26,6 +26,9 @@ class Institution(models.Model):
     type = models.IntegerField(choices=typy, default='1')
     categories = models.ManyToManyField(Category)
 
+    def __str__(self):
+        return self.name
+
 
 class Donation(models.Model):
     quantity = models.IntegerField(validators=[MinValueValidator(0, message='Minimum value = 0')])
@@ -42,5 +45,3 @@ class Donation(models.Model):
 
     def __str__(self):
         return self.institution
-
-# Create your models here.

@@ -1,6 +1,6 @@
-from django.forms import ModelForm, forms, ModelMultipleChoiceField, ModelChoiceField
+from django.forms import ModelForm,ModelMultipleChoiceField, ModelChoiceField
 
-from Base_app.models import Donation, Category
+from Base_app.models import Donation
 
 
 class DonationForm(ModelForm):

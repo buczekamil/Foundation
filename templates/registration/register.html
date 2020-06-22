@@ -1,17 +1,34 @@
 {% extends 'base.html' %}
 {% block content %}
+    <div>
+        <p>
+            <section class="login-page">
+                <h2>Załóż konto</h2>
+                <form method="post" >
+                    {% csrf_token %}
+                    <div class="form-group" >
+                        <input type="text" name="{{ form.first_name.html_name }}" required id= "id_first_name" placeholder="Imię" style="margin-left: 200px;">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="{{ form.last_name.html_name}}" required id= "id_last_name" placeholder="Nazwisko" style="margin-left: 200px;">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="{{ form.email.html_name}}" required id= "id_email" placeholder="Email" style="margin-left: 200px;">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="{{ form.password1.html_name}}" required id= "id_password1" placeholder="Hasło" style="margin-left: 200px;">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="{{ form.password2.html_name}}" required id= "id_password2" placeholder="Powtórz hasło" style="margin-left: 200px;">
+                    </div>
 
-    <section class="login-page">
-        <h2>Załóż konto</h2>
-        <form method="post">
-            {% csrf_token %}
-                {{ form.as_p }}
 
-
-                <div class="form-group form-group--buttons">
-                    <a href="login.html" class="btn btn--without-border">Zaloguj się</a>
-                    <button class="btn" type="submit">Załóż konto</button>
-                </div>
-        </form>
-    </section>
+                    <div class="form-group form-group--buttons">
+                        <a href="/accounts/login/" class="btn btn--without-border">Zaloguj się</a>
+                        <button class="btn" type="submit">Załóż konto</button>
+                    </div>
+                </form>
+            </section>
+    </div>
+    </p>
 {% endblock %}

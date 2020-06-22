@@ -264,11 +264,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     document.getElementById("summary-time").innerText = time.value;
                     document.getElementById("summary-more_info").innerText = "Uwagi: " + more_info.value;
 
-
-
-
-
-
                 })
             }
 

@@ -1,14 +1,9 @@
-from profile import Profile
-
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
 from django.http import JsonResponse, HttpResponseRedirect
-from django.contrib.auth import login
-from django.contrib.auth.models import User
 from django.db.models import Sum, Count
 from django.shortcuts import render, redirect
 from django.views import View
-
+from Accounts.models import MyUser
 from Base_app.forms import DonationForm
 from Base_app.models import Donation, Category, Institution
 
@@ -62,8 +57,13 @@ def add_donation(request):
                                                pick_up_time=pick_up_time,
                                                pick_up_comment=pick_up_comment,
                                                user=user)
-            donation.category.set(categories)
+            donation.category.set(categories) ### << --- MultipleChoiceField
             return HttpResponseRedirect('conf')
         else:
             pass
         return render(request, 'form.html', {"form": form})
+
+
+def get_user_profile(request, pk):
+    user = MyUser.objects.get(pk=pk)
+    return render(request, 'accounts/user_profile.html', {"user": user})

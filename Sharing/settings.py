@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'Sharing.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Charity',
+        'NAME': 'charity-donation',
         'HOST': 'localhost',
         'USER': 'postgres',
         'PASSWORD': 'yuliop'
@@ -135,6 +135,5 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
-LOGIN_REDIRECT_URL = '/landing/'
-LOGOUT_REDIRECT_URL = '/accounts/login/'
-
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
