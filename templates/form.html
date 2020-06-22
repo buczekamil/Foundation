@@ -65,10 +65,10 @@
                             <label>
                                 <input
                                         type="checkbox"
-                                        {#                                        name='category'#}
                                         name="{{ form.category.html_name }}"
                                         value="{{ value }}"
                                         id="category"
+                                        data-gift="{{ text }}"
                                 />
                                 <span class="checkbox"></span>
                                 <span class="description">
@@ -89,7 +89,8 @@
                         <label>
 
                             Liczba 60l worków:
-                            <input type="number" name="{{ form.quantity.html_name }}" step="1" min="1" id="{{ form.quantity.id_for_label }}"/>
+                            <input type="number" name="{{ form.quantity.html_name }}" step="1" min="1"
+                                   id="{{ form.quantity.id_for_label }}"/>
 
                         </label>
                     </div>
@@ -107,7 +108,7 @@
                     {% for inst in institutions %}
                         <div class="form-group form-group--checkbox">
                             <label>
-                                <input type="radio" name="{{ form.institution.html_name }}" value="{{ inst.id }}"
+                                <input type="radio" name="{{ form.institution.html_name }}" value="{{ inst.id }}" data-foo="{{ inst.name }}"
                                        id="{{ form.in.id_for_label }}"/>
                                 <span class="checkbox radio"></span>
                                 <span class="description">
@@ -135,22 +136,26 @@
                             <h4>Adres odbioru</h4>
                             <div class="form-group form-group--inline">
                                 <label> Ulica <input type="text"
-                                                     name="{{ form.address.html_name }}" id="{{ form.address.id_for_label }}"/> </label>
+                                                     name="{{ form.address.html_name }}"
+                                                     id="{{ form.address.id_for_label }}"/> </label>
                             </div>
 
                             <div class="form-group form-group--inline">
-                                <label> Miasto <input type="text" name="{{ form.city.html_name }}" id="{{ form.city.id_for_label }}"/> </label>
+                                <label> Miasto <input type="text" name="{{ form.city.html_name }}"
+                                                      id="{{ form.city.id_for_label }}"/> </label>
                             </div>
 
                             <div class="form-group form-group--inline">
                                 <label>
-                                    Kod pocztowy <input type="text" name="{{ form.zip_code.html_name }}" id="{{ form.zip_code.id_for_label }}"/>
+                                    Kod pocztowy <input type="text" name="{{ form.zip_code.html_name }}"
+                                                        id="{{ form.zip_code.id_for_label }}"/>
                                 </label>
                             </div>
 
                             <div class="form-group form-group--inline">
                                 <label>
-                                    Numer telefonu <input type="number" name="{{ form.phone.html_name }}" id="{{ form.phone.id_for_label }}"/>
+                                    Numer telefonu <input type="number" name="{{ form.phone.html_name }}"
+                                                          id="{{ form.phone.id_for_label }}"/>
                                 </label>
                             </div>
                         </div>
@@ -158,17 +163,20 @@
                         <div class="form-section--column">
                             <h4>Termin odbioru</h4>
                             <div class="form-group form-group--inline">
-                                <label> Data <input type="date" name="{{ form.pick_up_date.html_name }}" id="{{ form.pick_up_date.id_for_label }}"/> </label>
+                                <label> Data <input type="date" name="{{ form.pick_up_date.html_name }}"
+                                                    id="{{ form.pick_up_date.id_for_label }}"/> </label>
                             </div>
 
                             <div class="form-group form-group--inline">
-                                <label> Godzina <input type="time" name="{{ form.pick_up_time.html_name }}" id="{{ form.pick_up_time.id_for_label }}"/> </label>
+                                <label> Godzina <input type="time" name="{{ form.pick_up_time.html_name }}"
+                                                       id="{{ form.pick_up_time.id_for_label }}"/> </label>
                             </div>
 
                             <div class="form-group form-group--inline">
                                 <label>
                                     Uwagi dla kuriera
-                                    <textarea name="{{ form.pick_up_comment.html_name }}" rows="5" id="{{ form.pick_up_comment.id_for_label }}"></textarea>
+                                    <textarea name="{{ form.pick_up_comment.html_name }}" rows="5"
+                                              id="{{ form.pick_up_comment.id_for_label }}"></textarea>
                                 </label>
                             </div>
                         </div>
@@ -191,7 +199,9 @@
                                     <span class="icon icon-bag"></span>
                                     <span class="summary--text"
                                     ></span>
-
+                                    <label for="quantity">Liczba worków: <text id="quantity"> </text>
+                                        <p>Oddajesz: </p>
+                                       <p> <text id="gifts"></text></p>
                                 </li>
 
                                 <li>
@@ -199,6 +209,7 @@
                                     <span class="summary--text"
                                     ></span
                                     >
+                                    <p><text id="institution"></text></p>
                                 </li>
                             </ul>
                         </div>

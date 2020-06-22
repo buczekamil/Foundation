@@ -58,7 +58,7 @@ def add_donation(request):
                                                pick_up_comment=pick_up_comment,
                                                user=user)
             donation.category.set(categories) ### << --- MultipleChoiceField
-            return HttpResponseRedirect('conf')
+            return redirect('form-confirmation.html')
         else:
             pass
         return render(request, 'form.html', {"form": form})

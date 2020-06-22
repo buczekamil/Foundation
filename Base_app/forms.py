@@ -1,4 +1,5 @@
-from django.forms import ModelForm,ModelMultipleChoiceField, ModelChoiceField
+from django.forms import ModelForm, ModelMultipleChoiceField, ModelChoiceField
+from django.template.defaultfilters import register
 
 from Base_app.models import Donation
 
@@ -24,3 +25,8 @@ class DonationForm(ModelForm):
               'institution': ModelChoiceField
 
               }
+
+
+@register.filter
+def selected_category(form, field):
+    return [label for value, label in form.fields[field].choices if value in form[field].value()]

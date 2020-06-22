@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'Sharing.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'charity-donation',
+        'NAME': 'Charity',
         'HOST': 'localhost',
         'USER': 'postgres',
         'PASSWORD': 'yuliop'

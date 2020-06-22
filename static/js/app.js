@@ -240,7 +240,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     let category = document.getElementById("category");
                     let bags = document.getElementById("id_quantity");
                     let institution = document.getElementById("id_institution");
-                    // institution.setAttribute("value", institution.value);
                     bags.setAttribute("value", bags.value);
                     let address = document.getElementById("id_address");
                     address.setAttribute("value", address.value);
@@ -255,7 +254,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     let time = document.getElementById("id_pick_up_time");
                     time.setAttribute("value", time.value);
                     let more_info = document.getElementById("id_pick_up_comment");
+                    document.getElementById("institution").innerText = "Nazwa organizacji, której przekazujesz dary: "+ document.querySelector('input[name="institution"]:checked').dataset.foo;
                     more_info.setAttribute("value", more_info.value);
+                    document.getElementById("quantity").innerText = bags.value;
                     document.getElementById("summary-address").innerText = address.value;
                     document.getElementById("summary-city").innerText = city.value;
                     document.getElementById("summary-postcode").innerText = postcode.value;
@@ -263,6 +264,14 @@ document.addEventListener("DOMContentLoaded", function () {
                     document.getElementById("summary-data").innerText = data.value;
                     document.getElementById("summary-time").innerText = time.value;
                     document.getElementById("summary-more_info").innerText = "Uwagi: " + more_info.value;
+
+				let items=document.getElementsByName('category');
+				let selectedItems="";
+				for(let i=0; i<items.length; i++){
+					if(items[i].type=='checkbox' && items[i].checked==true)
+						selectedItems+="•"+items[i].dataset.gift +"\n";
+				}
+				document.getElementById("gifts").innerText = selectedItems
 
                 })
             }
