@@ -57,6 +57,7 @@ def add_donation(request):
                                                pick_up_comment=pick_up_comment,
                                                user=user)
             donation.category.set(categories)  ### << --- MultipleChoiceField
+
             return redirect('/adddonation/conf/')
         else:
             pass
