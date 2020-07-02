@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.db.models import Sum, Count
+from django.db.models import Sum, Count, Prefetch
 from django.shortcuts import render, redirect
 from django.views import View
 from Accounts.models import MyUser
@@ -9,15 +9,20 @@ from Base_app.models import Donation, Category, Institution
 
 class LandingPage(View):
     def get(self, request):
-        bags_dics = Donation.objects.all().aggregate(Sum('quantity'))
-        institutions_dics = Donation.objects.all().aggregate(Count('institution'))
+        bags = Donation.objects.all().aggregate(Sum('quantity'))
+        institutions = Institution.objects.all().aggregate((Count('pk')))
+        foundations = Institution.objects.filter(type=1)
+        organizations = Institution.objects.filter(type=2)
+        locals = Institution.objects.filter(type=3)
+
         try:
-            bags = int(bags_dics['total__sum'])
-            institutions = int(institutions_dics['total__sum'])
+            bag = int(bags['quantity__sum'])
+            institution = int(institutions['pk__count'])
         except KeyError:
-            bags = 0
-            institutions = 0
-        return render(request, 'index.html', {'bags': bags, 'institutions': institutions})
+            bag = 0
+            institution = 0
+        return render(request, 'index.html', {'bags': bag, 'institutions': institution, 'foundations': foundations,
+                                              "organizations": organizations, "locals":locals})
 
 
 def form_confirmation(request):

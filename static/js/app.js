@@ -283,10 +283,15 @@ document.addEventListener("DOMContentLoaded", function () {
             submit(e) {
                 e.preventDefault();
                 var form_data = $('#don-form').serialize()
+                console.log(form_data)
+                window.form_data=form_data
+                window.form_data2 = $('#don-form').serializeArray()
+
                 $.ajax({
                         type: 'POST',
                         url: '/adddonation/',
                         data: form_data
+                        // success <-- dod dokonczenia
                         // data: {
                         //     category: $('#category').val(),
                         //     quantity: $('#quantity').val(),
